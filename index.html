@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FastTest SMS Pro</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b1020;
+  color: white;
+}
+header {
+  background: #151d35;
+  padding: 24px 15px;
+  text-align: center;
+}
+header h1 { color: #57e3b0; }
+main {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+.card {
+  background: #18233d;
+  border-radius: 14px;
+  padding: 20px;
+  margin: 20px 0;
+}
+input, textarea, button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+input, textarea {
+  border: 1px solid #40506c;
+  background: #0b1020;
+  color: white;
+}
+button {
+  background: #28c995;
+  color: #08151b;
+  border: none;
+  font-weight: bold;
+}
+.small { color: #b9c4d8; font-size: 13px; }
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #aab5cb;
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>FastTest SMS Pro</h1>
+  <p>Bulk SMS Reseller Platform</p>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Welcome, Reseller!</h2>
+    <p>Manage your messaging business in one place.</p>
+    <p>Pakistan &amp; International SMS</p>
+  </section>
+
+  <section class="card">
+    <h2>SMS Dashboard Demo</h2>
+    <label for="phone">Recipient number</label>
+    <input id="phone" type="tel" placeholder="+923XXXXXXXXX">
+
+    <label for="message">Your message</label>
+    <textarea id="message" rows="4"
+      placeholder="Type your SMS message"></textarea>
+
+    <button onclick="demoSMS()">Test Dashboard</button>
+    <p id="status" class="small">
+      Demo mode: SMS provider is not connected.
+    </p>
+  </section>
+</main>
+
+<footer>FastTest SMS Pro &copy; 2026</footer>
+
+<script>
+function demoSMS() {
+  const phone = document.getElementById("phone").value.trim();
+  const message = document.getElementById("message").value.trim();
+  const status = document.getElementById("status");
+
+  if (!phone || !message) {
+    status.textContent = "Please enter a number and message.";
+    return;
+  }
+
+  status.textContent =
+    "Demo successful. No SMS was sent. Provider API is not connected.";
+}
+</script>
+</body>
+</html>
