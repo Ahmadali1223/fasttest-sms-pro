@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,100 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FastTest SMS Pro</title>
 <style>
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0b1020;
-  color: white;
-}
-header {
-  background: #151d35;
-  padding: 24px 15px;
-  text-align: center;
-}
-header h1 { color: #57e3b0; }
-main {
-  max-width: 600px;
-  margin: auto;
-  padding: 20px;
-}
-.card {
-  background: #18233d;
-  border-radius: 14px;
-  padding: 20px;
-  margin: 20px 0;
-}
-input, textarea, button {
-  width: 100%;
-  padding: 13px;
-  margin-top: 12px;
-  border-radius: 8px;
-  font-size: 16px;
-}
-input, textarea {
-  border: 1px solid #40506c;
-  background: #0b1020;
-  color: white;
-}
-button {
-  background: #28c995;
-  color: #08151b;
-  border: none;
-  font-weight: bold;
-}
-.small { color: #b9c4d8; font-size: 13px; }
-footer {
-  text-align: center;
-  padding: 20px;
-  color: #aab5cb;
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#0b1020;color:white}
+header{background:#151d35;padding:22px;text-align:center}
+h1{color:#57e3b0;margin:0}
+main{max-width:600px;margin:auto;padding:18px}
+.card{background:#18233d;border-radius:14px;padding:20px;margin:18px 0}
+input,textarea,button{width:100%;padding:13px;margin-top:12px;border-radius:8px;font-size:16px}
+input,textarea{background:#0b1020;color:white;border:1px solid #46516b}
+button{background:#57e3b0;color:#0b1020;border:0;font-weight:bold}
+.note{color:#b8c4dc;font-size:14px;line-height:1.6}
 </style>
 </head>
 <body>
 <header>
-  <h1>FastTest SMS Pro</h1>
-  <p>Bulk SMS Reseller Platform</p>
+<h1>FastTest SMS Pro</h1>
+<p>Bulk SMS Reseller Platform</p>
 </header>
-
 <main>
-  <section class="card">
-    <h2>Welcome, Reseller!</h2>
-    <p>Manage your messaging business in one place.</p>
-    <p>Pakistan &amp; International SMS</p>
-  </section>
-
-  <section class="card">
-    <h2>SMS Dashboard Demo</h2>
-    <label for="phone">Recipient number</label>
-    <input id="phone" type="tel" placeholder="+923XXXXXXXXX">
-
-    <label for="message">Your message</label>
-    <textarea id="message" rows="4"
-      placeholder="Type your SMS message"></textarea>
-
-    <button onclick="demoSMS()">Test Dashboard</button>
-    <p id="status" class="small">
-      Demo mode: SMS provider is not connected.
-    </p>
-  </section>
+<div class="card">
+<h2>Welcome, Reseller!</h2>
+<p>Manage your messaging business in one place.</p>
+<p>Pakistan & International SMS</p>
+</div>
+<div class="card">
+<h2>SMS Dashboard</h2>
+<label>Recipient Number</label>
+<input id="phone" type="tel" placeholder="+923001234567">
+<label>Message</label>
+<textarea id="message" rows="4" placeholder="Type your SMS here"></textarea>
+<button onclick="previewSMS()">Preview SMS</button>
+<p id="result" class="note">Your message preview will appear here.</p>
+</div>
+<div class="card">
+<h3>Provider Status</h3>
+<p>Vonage API: Not connected</p>
+<p class="note">Secure server configuration is required before sending real SMS.</p>
+</div>
 </main>
-
-<footer>FastTest SMS Pro &copy; 2026</footer>
-
 <script>
-function demoSMS() {
-  const phone = document.getElementById("phone").value.trim();
-  const message = document.getElementById("message").value.trim();
-  const status = document.getElementById("status");
-
-  if (!phone || !message) {
-    status.textContent = "Please enter a number and message.";
-    return;
-  }
-
-  status.textContent =
-    "Demo successful. No SMS was sent. Provider API is not connected.";
+function previewSMS(){
+const phone=document.getElementById('phone').value.trim();
+const message=document.getElementById('message').value.trim();
+const result=document.getElementById('result');
+if(!/^\+[1-9]\d{7,14}$/.test(phone)){
+result.textContent='Please enter a valid international number, e.g. +923001234567.';
+return;
+}
+if(!message){
+result.textContent='Please type your message first.';
+return;
+}
+result.textContent='Preview ready for '+phone+'. Characters: '+message.length+'. No SMS has been sent.';
 }
 </script>
 </body>
