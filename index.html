@@ -1,3 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FastTest SMS Pro | OTP Panel</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b1020;color:#eef3ff;font-family:Arial,sans-serif}
+header{background:#151d35;padding:20px;border-bottom:1px solid #293754}
+header h1{color:#57e3b0;margin:0;font-size:25px}
+header p{color:#aab8d3;margin-bottom:0}
+main{max-width:950px;margin:auto;padding:18px}
+h2{font-size:19px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{background:#18233d;border:1px solid #2b3a59;border-radius:14px;padding:18px;margin-bottom:15px}
+.stat{font-size:26px;color:#57e3b0;font-weight:bold;margin:12px 0}
+small,.muted{color:#aab8d3;line-height:1.6}
+label{display:block;margin-top:14px;color:#dce5fa}
+input,select{width:100%;padding:13px;margin-top:7px;background:#0b1020;color:white;border:1px solid #465675;border-radius:8px;font-size:16px}
+button{width:100%;padding:13px;margin-top:14px;border:0;border-radius:8px;background:#57e3b0;color:#0b1020;font-size:15px;font-weight:bold;cursor:pointer}
+button.secondary{background:#293754;color:white}
+.status{color:#ffd479}
+.badge{display:inline-block;background:#263b50;color:#57e3b0;padding:6px 9px;border-radius:20px;font-size:12px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+nav button{width:auto;margin:0;flex:1;min-width:100px}
+footer{text-align:center;color:#8291ad;padding:18px;font-size:12px}
+@media(max-width:520px){.grid{grid-template-columns:1fr}main{padding:12px}}
+</style>
+</head>
+<body>
+<header>
+<h1>FastTest SMS Pro</h1>
+<p>OTP Reseller Platform</p>
+</header>
+<main>
+<nav>
+<button onclick="showTab('dashboard')">Dashboard</button>
+<button class="secondary" onclick="showTab('otp')">OTP Services</button>
+<button class="secondary" onclick="showTab('account')">My Account</button>
+</nav>
+
+<section id="dashboard">
+<div class="card">
+<span class="badge">DEMO MODE</span>
+<h2>Welcome, Reseller!</h2>
+<p class="muted">Manage your OTP verification services in one place.</p>
+<p>Provider: <strong>Vonage</strong></p>
+<p>Connection: <span class="status">Not connected</span></p>
+</div>
+<div class="grid">
+<div class="card">
+<small>Account Balance</small>
+<div class="stat">Rs. 0.00</div>
+<small>Demo display only</small>
+</div>
+<div class="card">
+<small>OTP Requests</small>
+<div class="stat" id="count">0</div>
+<small>Requests in this demo session</small>
+</div>
+</div>
+<div class="card">
+<h2>Quick Start</h2>
+<p class="muted">1. Configure the secure backend.</p>
+<p class="muted">2. Add Vonage credentials in Vercel Environment Variables.</p>
+<p class="muted">3. Test verification using your authorized phone number.</p>
+<button onclick="showTab('otp')">Open OTP Services</button>
+</div>
+</section>
+
+<section id="otp" hidden>
+<div class="card">
+<h2>Request OTP</h2>
+<p class="muted">Demo interface. No SMS will be sent until the backend is connected.</p>
+<label for="phone">Your authorized phone number</label>
+<input id="phone" type="tel" placeholder="+923001234567" autocomplete="tel">
+<label for="service">Verification service</label>
+<select id="service">
+<option value="Website Login">Website Login</option>
+<option value="Account Registration">Account Registration</option>
+<option value="Account Recovery">Account Recovery</option>
+</select>
+<button onclick="requestDemo()">Test Request Interface</button>
+<p id="result" class="muted" role="status" aria-live="polite">No request submitted.</p>
+</div>
+<div class="card">
+<h2>Provider Configuration</h2>
+<p>Provider: Vonage Verify API</p>
+<p>API status: <span class="status">Not connected</span></p>
+<p class="muted">Credentials must be configured on the server, never in this HTML file.</p>
+</div>
+</section>
+
+<section id="account" hidden>
+<div class="card">
+<h2>My Account</h2>
+<p>Account type: <strong>Demo Reseller</strong></p>
+<p>Balance: Rs. 0.00 (sample display)</p>
+<p class="muted">Real customer accounts, transactions and reseller pricing require a database and authenticated backend.</p>
+</div>
+</section>
+</main>
+<footer>FastTest SMS Pro · Secure OTP Platform · Demo Interface</footer>
+
+<script>
+let requests = 0;
+
+function showTab(tab){
+['dashboard','otp','account'].forEach(id=>{
+document.getElementById(id).hidden = id !== tab;
+});
+window.scrollTo(0,0);
+}
+
+function requestDemo(){
+const phone = document.getElementById('phone').value.trim();
+const result = document.getElementById('result');
+
+if(!/^\+[1-9]\d{7,14}$/.test(phone)){
+result.textContent = 'Enter a valid international number, e.g. +923001234567.';
+return;
+}
+
+requests++;
+document.getElementById('count').textContent = requests;
+result.textContent =
+'Demo request checked for ' + phone +
+'. No OTP was generated and no SMS was sent. Connect the secure backend to enable verification.';
+}
+</script>
+</body>
+</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
